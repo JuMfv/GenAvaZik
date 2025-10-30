@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>MoodAvatar — générateur d'avatar et musique</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<header class="header">
+		<h1>MoodAvatar</h1>
+		<p>Créez un avatar, choisissez une humeur, laissez la musique animer le rendu.</p>
+	</header>
+
+	<main class="container">
+		<section class="controls">
+			<h2>Créer son avatar</h2>
+
+			<label>Style
+				<select id="styleSelect">
+					<option value="flat">Flat</option>
+					<option value="pixel">Pixel</option>
+					<option value="line">Ligne</option>
+				</select>
+			</label>
+
+			<label>Couleur principale
+				<input type="color" id="primaryColor" value="#4aa3ff">
+			</label>
+
+			<label>Accessoire
+				<select id="accessorySelect">
+					<option value="none">Aucun</option>
+					<option value="glasses">Lunettes</option>
+					<option value="hat">Chapeau</option>
+					<option value="earring">Boucle</option>
+				</select>
+			</label>
+
+			<label>Morphologie
+				<input type="range" id="morphRange" min="0" max="100" value="50">
+			</label>
+
+			<h2>Humeur / Profil</h2>
+			<div class="mood-row">
+				<label><input type="radio" name="mood" value="detendu" checked> Détendu</label>
+				<label><input type="radio" name="mood" value="energique"> Énergique</label>
+				<label><input type="radio" name="mood" value="reflechis"> Réfléchi</label>
+				<label><input type="radio" name="mood" value="joyeux"> Joyeux</label>
+			</div>
+
+			<div class="player-controls">
+				<button id="playBtn">Play</button>
+				<button id="pauseBtn">Pause</button>
+				<button id="exportBtn">Exporter image</button>
+				<div id="progressBar" class="progress"><div class="progress-fill"></div></div>
+			</div>
+
+		</section>
+
+		<section class="preview">
+			<h2>Aperçu</h2>
+			<canvas id="avatarCanvas" width="480" height="480" aria-label="Aperçu de l'avatar"></canvas>
+			<div id="moodLabel" class="mood-label">Humeur: Détendu</div>
+		</section>
+	</main>
+
+	<footer class="footer">
+		<small>Prototype — Musique générée localement (Web Audio) — Stockage local.</small>
+	</footer>
+
+	<script src="js/main.js"></script>
+</body>
+</html>
