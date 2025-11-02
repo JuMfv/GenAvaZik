@@ -8,8 +8,20 @@
 </head>
 <body>
 	<header class="header">
-		<h1>MoodAvatar</h1>
-		<p>Créez un avatar, choisissez une humeur, laissez la musique animer le rendu.</p>
+		<div class="header-left">
+			<h1>MoodAvatar</h1>
+			<p>Créez un avatar, choisissez une humeur, laissez la musique animer le rendu.</p>
+		</div>
+		<div class="header-right">
+			<button class="user-badge" aria-label="Utilisateur">
+				<!-- simple user icon -->
+				<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+					<path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5z" fill="#04202f"/>
+					<path d="M3 21c0-3.866 3.582-7 9-7s9 3.134 9 7v1H3v-1z" fill="#04202f"/>
+				</svg>
+				<span class="user-name">Alex</span>
+			</button>
+		</div>
 	</header>
 
 	<main class="container">
@@ -27,6 +39,24 @@
 			<label>Couleur principale
 				<input type="color" id="primaryColor" value="#4aa3ff">
 			</label>
+
+					<label>Presets
+						<div style="display:flex;gap:8px">
+							<select id="presetSelect">
+								<option value="custom">-- Personnalisé --</option>
+								<option value="sunset">Sunset</option>
+								<option value="ocean">Ocean</option>
+								<option value="midnight">Midnight</option>
+								<option value="pop">Pop</option>
+							</select>
+							<button id="randomBtn" class="icon-btn" aria-label="Randomiser" data-tooltip="Randomiser">
+								<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+									<path d="M3 3h6l6 12h6" stroke="#04202f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+									<path d="M14 3h7v7" stroke="#04202f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+								</svg>
+							</button>
+						</div>
+					</label>
 
 			<label>Accessoire
 				<select id="accessorySelect">
@@ -49,12 +79,61 @@
 				<label><input type="radio" name="mood" value="joyeux"> Joyeux</label>
 			</div>
 
+					<label>BPM
+						<input type="range" id="bpmRange" min="60" max="160" value="100">
+						<div style="font-size:12px;color:var(--muted)">Tempo: <span id="bpmLabel">100</span> BPM</div>
+					</label>
+
 			<div class="player-controls">
-				<button id="playBtn">Play</button>
-				<button id="pauseBtn">Pause</button>
-				<button id="exportBtn">Exporter image</button>
+				<button id="playBtn" class="icon-btn" aria-label="Lecture" data-tooltip="Lire (Espace)">
+					<!-- play icon -->
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+						<path d="M5 3v18l15-9L5 3z" fill="#04202f" />
+					</svg>
+				</button>
+				<button id="pauseBtn" class="icon-btn" aria-label="Pause" data-tooltip="Pause">
+					<!-- pause icon -->
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+						<rect x="6" y="4" width="4" height="16" fill="#04202f" />
+						<rect x="14" y="4" width="4" height="16" fill="#04202f" />
+					</svg>
+				</button>
+				<button id="exportBtn" class="icon-btn" aria-label="Exporter" data-tooltip="Exporter PNG">
+					<!-- export / download icon -->
+					<svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+						<path d="M5 20h14v-2H5v2zM12 3v9" stroke="#04202f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+						<path d="M7 9l5-5 5 5" stroke="#04202f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+					</svg>
+				</button>
+
 				<div id="progressBar" class="progress"><div class="progress-fill"></div></div>
 			</div>
+
+			<!-- Save profile -->
+			<label style="margin-top:12px;">
+				Nom du profil
+				<div style="display:flex;gap:8px;align-items:center">
+					<input type="text" id="profileName" placeholder="Votre nom" />
+					<button id="saveProfileBtn" class="icon-btn" aria-label="Enregistrer le profil" data-tooltip="Enregistrer le profil">
+						<!-- save icon -->
+						<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+							<path d="M5 4h14v16H5z" stroke="#04202f" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+							<path d="M9 4v6h6V4" stroke="#04202f" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+						</svg>
+					</button>
+				</div>
+			</label>
+
+			<!-- Import profile image -->
+			<label style="margin-top:8px;">
+				Importer une image de profil
+				<div style="display:flex;gap:8px;align-items:center">
+					<input type="file" id="profileImageInput" accept="image/*">
+				</div>
+			</label>
+
+			<!-- Preset thumbnails -->
+			<div id="presetThumbs" style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"></div>
 
 		</section>
 

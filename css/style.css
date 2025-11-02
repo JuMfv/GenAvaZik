@@ -23,6 +23,13 @@ html,body{
     margin:0;
     font-size:20px
 }
+.header{ display:flex; align-items:center; justify-content:space-between }
+.header-right{ display:flex; align-items:center; gap:12px }
+.user-badge{
+    display:inline-flex; align-items:center; gap:8px; background:var(--glass); color:var(--muted); border:1px solid rgba(255,255,255,0.03); padding:6px 10px; border-radius:999px; cursor:default;
+}
+.user-badge svg{ display:block }
+.user-name{ font-size:13px; color:#e6eef6 }
 .container{
     display:grid;
     grid-template-columns:360px 1fr;
@@ -49,6 +56,7 @@ label{
     margin:8px 0;
     color:var(--muted)
 }
+label > div{margin-top:6px}
 select,input[type=color],input[type=range]{
     width:100%;
     padding:8px;
@@ -74,6 +82,51 @@ button{
     border-radius:8px;
     cursor:pointer
 }
+
+.icon-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:40px;
+    height:40px;
+    padding:6px;
+    border-radius:8px;
+    background:var(--accent);
+}
+.icon-btn svg{ display:block; }
+.icon-btn:focus{ outline:3px solid rgba(122,196,255,0.18); outline-offset:2px }
+.icon-btn:hover{ filter:brightness(0.98) }
+/* tooltip */
+.icon-btn{
+    position:relative;
+    transition:transform 120ms ease, box-shadow 120ms ease;
+}
+.icon-btn[data-tooltip]:hover::after,
+.icon-btn[data-tooltip]:focus::after{
+    content:attr(data-tooltip);
+    position:absolute;
+    bottom:calc(100% + 8px);
+    left:50%;
+    transform:translateX(-50%);
+    background:rgba(2,6,23,0.9);
+    color:var(--muted);
+    padding:6px 8px;
+    border-radius:6px;
+    font-size:12px;
+    white-space:nowrap;
+    box-shadow:0 6px 18px rgba(2,6,23,0.6);
+    opacity:1;
+    pointer-events:none;
+}
+.icon-btn::after{ opacity:0; transition:opacity 160ms ease, transform 160ms ease; transform:translateY(6px); }
+
+/* press animation */
+.icon-btn:active{ transform:scale(0.96); }
+
+/* playing pulse state */
+.icon-btn.playing{ box-shadow:0 0 0 0 rgba(122,196,255,0.18); animation:btnPulse 1100ms infinite; }
+@keyframes btnPulse{ 0%{ box-shadow:0 0 0 0 rgba(122,196,255,0.18);} 70%{ box-shadow:0 0 0 12px rgba(122,196,255,0);} 100%{ box-shadow:0 0 0 0 rgba(122,196,255,0);} }
+/* Optional third-party button removed */
 button[disabled]{
     opacity:.5;
     cursor:not-allowed
@@ -110,3 +163,6 @@ button[disabled]{
 	.container{grid-template-columns:1fr;}
 	.controls{order:2}
 }
+
+.dance{transition:transform 0.08s ease-out}
+
